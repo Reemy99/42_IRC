@@ -12,3 +12,5 @@
     It helps your computer wait for things to happen without using too much energy checking all the time.
     when you're using recv() or send() to read or write data with non-blocking file descriptor spoll() to wait until there's something to read or write.
 
+### the equivalent of the poll() function:
+    The select() function is often used in C/C++98 to achieve similar I/O multiplexing capabilities as poll(), It helps you to listens for activity on different (fd) and tells you when there's something happening.
