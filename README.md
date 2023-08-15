@@ -3,7 +3,7 @@
  ## non-blocking file descriptors:
      non-blocking file descriptors help your computer do multiple tasks without getting stuck waiting for each task to be done.
 
-### How to use To use non-blocking file descriptors :
+### How to use non-blocking file descriptors :
 1) Open a File Descriptor with socket().
 2) Set Non-blocking Mode with fcntl().
 3) Use Non-blocking Operations with read(), write(), recv(), send().
