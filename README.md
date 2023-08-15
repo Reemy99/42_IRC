@@ -1,6 +1,9 @@
 # IRC
+_____________________________________________________________________________________________
 
- ## non-blocking file descriptors:
+## Tp do the Server you have to know the folowing steps:
+
+ ### non-blocking file descriptors:
      non-blocking file descriptors help your computer do multiple tasks without getting stuck waiting for each task to be done.
 
 ### How to use non-blocking file descriptors :
@@ -15,3 +18,5 @@
 ### the equivalent of the poll() function:
     The select() function is often used in C/C++98 to achieve similar I/O multiplexing capabilities as poll().
     It helps you to listens for activity on different (fd) and tells you when there's something happening.
+
+### TCP/IP
