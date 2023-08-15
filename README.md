@@ -1,7 +1,7 @@
 # IRC
 _____________________________________________________________________________________________
 
-## Tp do the Server you have to know the folowing steps:
+## Tp do the Server you have to know the following steps:
 
  ### non-blocking file descriptors:
      non-blocking file descriptors help your computer do multiple tasks without getting stuck waiting for each task to be done.
@@ -19,4 +19,6 @@ ________________________________________________________________________________
     The select() function is often used in C/C++98 to achieve similar I/O multiplexing capabilities as poll().
     It helps you to listens for activity on different (fd) and tells you when there's something happening.
 
-### TCP/IP
+### TCP/IP:
+    (Transmission Control Protocol/Internet Protocol) is a set of communication protocols that computers use to talk to each other over a network.
+    TCP and IP work like a team to make sure your data gets from one computer to another in an accurate way.
