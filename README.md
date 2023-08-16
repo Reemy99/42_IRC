@@ -96,4 +96,15 @@ ________________________________________________________________________________
    * **sockfd :** fd that you're using to listen for incoming connections.
    * **backlog :** How many new connections your computer can remember at once. It's like how many seats you have at your party.
 
+7) ***recv() :*** is like opening a special mailbox to see if your computer got any messages from other computers.
+
+       #include <sys/types.h>
+       #include <sys/socket.h>
+       
+       ssize_t recv(int sockfd, void *buf, size_t len, int flags);
+
+  * **sockfd : ** The socket fd that you're using to receive the message.
+  * **buf:** A place where the message will be put.
+  * **len:** How much space is in the buffer to hold the message.
+  * **flags:** Special options for receiving. You can usually set this to 0.
 
