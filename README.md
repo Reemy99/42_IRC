@@ -73,7 +73,15 @@ ________________________________________________________________________________
     * **sockfd :** is the fd of the socket that you want to attach an address to.
     * **addr :** This is where you put the address information.
     * **addrlen :** This is the size of the address structure.
-5) ***send() :*** send messages to other computers.
+      
+      > #include <netinet/in.h>
+      > struct sockaddr_in {
+      > short      sin_family; // Address family (like IPv4 or IPv6)
+      > u_short    sin_port;   // Port number
+      > struct in_addr sin_addr; // IP address
+};
+
+6) ***send() :*** send messages to other computers.
    
           #include <sys/types.h>
           #include <sys/socket.h>
@@ -85,7 +93,7 @@ ________________________________________________________________________________
     * **len:** The length of the message in bytes. It's like how long your message is.
     * **flags:** Special options for sending. You can usually set this to 0.
   
-  6) ***listen() :*** helps your computer be ready to accept new connections from other computers.
+  7) ***listen() :*** helps your computer be ready to accept new connections from other computers.
 
     #include <sys/types.h>
     #include <sys/socket.h>
