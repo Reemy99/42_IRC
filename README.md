@@ -21,7 +21,7 @@ ________________________________________________________________________________
 
 _____________________________________________________________________________________________
  ## Functions Explaintion :
-1) socket() : create a communication endpoint, or a socket, that allows different computer processes to send and receive data over a network.
+1) ***socket() :*** create a communication endpoint, or a socket, that allows different computer processes to send and receive data over a network.
      -Prototype of the socket() function in C++98
    
        #include <sys/types.h>
@@ -32,5 +32,5 @@ ________________________________________________________________________________
    * **type:** Specifies the socket type, which can be SOCK_STREAM for reliable, connection-oriented communication (like a phone call) or SOCK_DGRAM for connectionless, unreliable              communication (like sending letters).
    * **protocol:** Specifies the protocol to be used, which is usually set to 0 to automatically select the appropriate protocol based on the domain and type.
   
-3) poll() : It helps your computer wait for things to happen without using too much energy checking all the time.
+3) ***poll() :*** It helps your computer wait for things to happen without using too much energy checking all the time.
     when you're using recv() or send() to read or write data with non-blocking file descriptor spoll() to wait until there's something to read or write.
