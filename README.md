@@ -103,7 +103,7 @@ ________________________________________________________________________________
        
        ssize_t recv(int sockfd, void *buf, size_t len, int flags);
 
-  * **sockfd : ** The socket fd that you're using to receive the message.
+  * **sockfd :** The socket fd that you're using to receive the message.
   * **buf:** A place where the message will be put.
   * **len:** How much space is in the buffer to hold the message.
   * **flags:** Special options for receiving. You can usually set this to 0.
