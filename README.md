@@ -22,7 +22,6 @@ ________________________________________________________________________________
 _____________________________________________________________________________________________
  ## Functions Explanation :
 1) ***socket() :*** create a communication endpoint, or a socket, that allows different computer processes to send and receive data over a network.
-     -Prototype of the socket() function in C++98
    
        #include <sys/types.h>
        #include <sys/socket.h>
