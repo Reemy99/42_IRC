@@ -45,11 +45,11 @@ ________________________________________________________________________________
    
     > struct pollfd {
     > 
-    > int   fd;         // File descriptor to monitor
+    > int   fd;
     > 
-    > short events;     // Events to monitor for (pollin, pollout, pollerr, etc.)
+    > short events; // pollin, pollout and pollerr
     > 
-    > short revents;    // Actual events that occurred
+    > short revents;
 };
  
    * **nfds :** The number of file descriptors in the array.
