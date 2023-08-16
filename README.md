@@ -85,5 +85,15 @@ ________________________________________________________________________________
     * **buf:** The message you want to send. It's like the words you want your friend to hear.
     * **len:** The length of the message in bytes. It's like how long your message is.
     * **flags:** Special options for sending. You can usually set this to 0.
+  
+  6) ***listen() :*** helps your computer be ready to accept new connections from other computers.
+
+    #include <sys/types.h>
+    #include <sys/socket.h>
+     
+    int listen(int sockfd, int backlog);
+    
+   * **sockfd :** fd that you're using to listen for incoming connections.
+   * **backlog :** How many new connections your computer can remember at once. It's like how many seats you have at your party.
 
 
