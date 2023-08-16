@@ -63,5 +63,27 @@ ________________________________________________________________________________
    * **fd :** file descriptor of the file you want to work with.
    * **cmd :** the command you want to give to the file. It tells the function what you want to do, like getting or setting different properties of the file.
    * **arg :** optional argument that you might need for some commands. It gives the function more information about what you want to do.
- 
+
+ 4) ***bind() ::*** use to set up the address for their computer so others can connect to it over the network.
+         
+         #include <sys/types.h>
+         #include <sys/socket.h>
+         
+         int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+
+    * **sockfd :** is the fd of the socket that you want to attach an address to.
+    * **addr :** This is where you put the address information.
+    * **addrlen :** This is the size of the address structure.
+5) ***send() :*** send messages to other computers.
+   
+          #include <sys/types.h>
+          #include <sys/socket.h>
+          
+          ssize_t send(int sockfd, const void *buf, size_t len, int flags);
+   
+    * **sockfd:** The socket file descriptor that you're using to send the message.
+    * **buf:** The message you want to send. It's like the words you want your friend to hear.
+    * **len:** The length of the message in bytes. It's like how long your message is.
+    * **flags:** Special options for sending. You can usually set this to 0.
+
 
