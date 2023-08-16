@@ -1,7 +1,7 @@
 # IRC
 _____________________________________________________________________________________________
 
-## Tp do the Server you have to know the following steps:
+## To do the Server you have to know the following steps:
 
  ### non-blocking file descriptors:
      non-blocking file descriptors help your computer do multiple tasks without getting stuck waiting for each task to be done.
@@ -22,3 +22,14 @@ ________________________________________________________________________________
 ### TCP/IP:
     (Transmission Control Protocol/Internet Protocol) is a set of communication protocols that computers use to talk to each other over a network.
     TCP and IP work like a team to make sure your data gets from one computer to another in an accurate way.
+
+_____________________________________________________________________________________________
+ ## Functions Explaintion :
+ socket() : create a communication endpoint, or a socket, that allows different computer processes to send and receive data over a network.
+   -Prototype of the socket() function in C++98
+   
+      #include <sys/types.h>
+      #include <sys/socket.h>
+      
+      int socket(int domain, int type, int protocol);
+  
