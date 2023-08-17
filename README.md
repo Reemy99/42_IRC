@@ -19,6 +19,8 @@ ________________________________________________________________________________
    (Transmission Control Protocol/Internet Protocol) is a set of communication protocols that computers use to talk to each other over a network.
    TCP and IP work like a team to make sure your data gets from one computer to another in an accurate way.
 
+   TCP it has the content of the message and IP it has the address.
+
 _____________________________________________________________________________________________
  ## Functions Explanation :
 1) ***socket() :*** create a communication endpoint, or a socket, that allows different computer processes to send and receive data over a network.
