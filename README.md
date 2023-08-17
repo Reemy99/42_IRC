@@ -74,8 +74,6 @@ ________________________________________________________________________________
     * **addr :** This is where you put the address information.
     * **addrlen :** This is the size of the address structure.
       
-      > #include <netinet/in.h>
-      > 
       > struct sockaddr_in {
       > 
       > short      sin_family; // Address family (like IPv4 or IPv6)
