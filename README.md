@@ -122,4 +122,4 @@ ______________________________________
 
 ### The Netcat ( nc )
 
-command is a command-line utility for reading and writing data between two computer networks. The communication happens using either TCP or UDP
+command-line utility for reading and writing data between two computer networks. The communication happens using either TCP or UDP
