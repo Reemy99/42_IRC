@@ -58,6 +58,8 @@ ________________________________________________________________________________
   
  > **Difference between poll() and pollfd()():**
 "poll" is the action you take to listen for activity on many compurters at once, and "pollfd" is the helper that helps you do that by keeping track of each computer status.
+
+**POLLIN:** This symbolic constant represents the presence of data available for reading within a given file descriptor. It signifies that the file descriptor is ready for input operations and can be read without blocking.
   
 3) ***fcntl() :*** used to perform various operations on a file descriptor. like change the file's access mode, non-blocking behavior, or to get information about the file.
 
