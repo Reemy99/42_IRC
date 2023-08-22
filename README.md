@@ -133,7 +133,7 @@ ______________________________________
  - Creating a place (the vector) to store a bunch of "User". This vector will help you keep track of these users.
 
        #include <vector>
-       std::vector<name> name;
+       std::vector<type_name> vector_name;
 
 ______________________________________
 
