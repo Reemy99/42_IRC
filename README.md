@@ -118,6 +118,9 @@ ________________________________________________________________________________
   * **buf:** A place where the message will be put.
   * **len:** How much space is in the buffer to hold the message.
   * **flags:** Special options for receiving. You can usually set this to 0.
+
+8) ***htons() :*** -> Host To Network Short
+    make sure numbers are understood correctly when sending them between computers on a network IP/TCP.
 ______________________________________
 
 ### The Netcat ( nc )
