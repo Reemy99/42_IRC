@@ -129,7 +129,16 @@ ________________________________________________________________________________
 you would provide it with a 16-bit unsigned integer (like a port number) that you want to convert to network byte order. The function will then return the value in the appropriate byte order for sending over a network.
 
 ______________________________________
+**Vector**
+ - Creating a place (the vector) to store a bunch of "User". This vector will help you keep track of these users.
 
-### The Netcat ( nc )
+       #include <vector>
+       std::vector<name> name;
+
+______________________________________
+
+### The Netcat ( nc ) command
 
 command-line utility for reading and writing data between two computer networks. The communication happens using either TCP or UDP
+
+______________________________________
