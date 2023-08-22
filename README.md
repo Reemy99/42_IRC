@@ -121,6 +121,13 @@ ________________________________________________________________________________
 
 8) ***htons() :*** -> Host To Network Short
     make sure numbers are understood correctly when sending them between computers on a network IP/TCP.
+
+       #include <arpa/inet.h>
+
+       uint16_t htons(uint16_t hostshort);
+
+you would provide it with a 16-bit unsigned integer (like a port number) that you want to convert to network byte order. The function will then return the value in the appropriate byte order for sending over a network.
+
 ______________________________________
 
 ### The Netcat ( nc )
