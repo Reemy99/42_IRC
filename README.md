@@ -56,6 +56,9 @@ ________________________________________________________________________________
    * **nfds :** The number of file descriptors in the array.
    * **timeout :**  The maximum amount of time to wait for an event to occur, It's specified in milliseconds.-1 for an indefinite wait, 0 for a non-blocking check, or a positive value for a specific timeout.
   
+`#ffffff` **Difference between poll() and pollfd()():** `#000000`
+"poll" is the action you take to listen for activity on many compurters at once, and "pollfd" is the helper that helps you do that by keeping track of each computer status.
+  
 3) ***fcntl() :*** used to perform various operations on a file descriptor. like change the file's access mode, non-blocking behavior, or to get information about the file.
 
        #include <fcntl.h>
