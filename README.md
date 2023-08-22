@@ -23,18 +23,9 @@ ________________________________________________________________________________
 
 _____________________________________________________________________________________________
  ## Functions Explanation :
-1) ***socket() :*** create a communication endpoint, or a socket, that allows different computer processes to send and receive data over a network.
-   
-       #include <sys/types.h>
-       #include <sys/socket.h>
-      
-       int socket(int domain, int type, int protocol);
-   * **domain:** Specifies the communication domain, such as AF_INET for IPv4 or AF_INET6.
-   * **type:** Specifies the socket type, which can be SOCK_STREAM for reliable, connection-oriented communication (like a phone call) or SOCK_DGRAM for connectionless, unreliable              communication (like sending letters).
-   * **protocol:** Specifies the protocol to be used, which is usually set to 0 to automatically select the appropriate protocol based on the domain and type.
-
-
-2) ***poll() :*** It helps your computer wait for things to happen without using too much energy checking all the time.
+ ____________________________________________________________________________________________
+ 
+ 1) ***poll() :*** It helps your computer wait for things to happen without using too much energy checking all the time.
     when you're using recv() or send() to read or write data with non-blocking file descriptors poll() to wait until there's something to read or write.
 
        #include <poll.h>
@@ -60,7 +51,22 @@ ________________________________________________________________________________
 "poll" is the action you take to listen for activity on many compurters at once, and "pollfd" is the helper that helps you do that by keeping track of each computer status.
 
 **POLLIN:** This symbolic constant represents the presence of data available for reading within a given file descriptor. It signifies that the file descriptor is ready for input operations and can be read without blocking.
-  
+
+**"revents,"** you can see the current status of each door you're listening to and decide what action to take based on what's happening. It's like getting updates from your helper about what's happening at the doors you care about.
+
+-------------------------
+
+2) ***socket() :*** create a communication endpoint, or a socket, that allows different computer processes to send and receive data over a network.
+   
+       #include <sys/types.h>
+       #include <sys/socket.h>
+      
+       int socket(int domain, int type, int protocol);
+   * **domain:** Specifies the communication domain, such as AF_INET for IPv4 or AF_INET6.
+   * **type:** Specifies the socket type, which can be SOCK_STREAM for reliable, connection-oriented communication (like a phone call) or SOCK_DGRAM for connectionless, unreliable              communication (like sending letters).
+   * **protocol:** Specifies the protocol to be used, which is usually set to 0 to automatically select the appropriate protocol based on the domain and type.
+-------------------------
+
 3) ***fcntl() :*** used to perform various operations on a file descriptor. like change the file's access mode, non-blocking behavior, or to get information about the file.
 
        #include <fcntl.h>
@@ -69,6 +75,7 @@ ________________________________________________________________________________
    * **fd :** file descriptor of the file you want to work with.
    * **cmd :** the command you want to give to the file. It tells the function what you want to do, like getting or setting different properties of the file.
    * **arg :** optional argument that you might need for some commands. It gives the function more information about what you want to do.
+-------------------------
 
  4) ***bind() ::*** use to set up the address for their computer so others can connect to it over the network.
          
@@ -89,8 +96,9 @@ ________________________________________________________________________________
       > 
       > struct in_addr sin_addr; // IP address
 };
+-------------------------
 
-6) ***send() :*** send messages to other computers.
+5) ***send() :*** send messages to other computers.
    
           #include <sys/types.h>
           #include <sys/socket.h>
@@ -101,8 +109,9 @@ ________________________________________________________________________________
     * **buf:** The message you want to send. It's like the words you want your friend to hear.
     * **len:** The length of the message in bytes. It's like how long your message is.
     * **flags:** Special options for sending. You can usually set this to 0.
-  
-  7) ***listen() :*** helps your computer be ready to accept new connections from other computers.
+  -------------------------
+
+  6) ***listen() :*** helps your computer be ready to accept new connections from other computers.
 
     #include <sys/types.h>
     #include <sys/socket.h>
@@ -111,6 +120,7 @@ ________________________________________________________________________________
     
    * **sockfd :** fd that you're using to listen for incoming connections.
    * **backlog :** How many new connections your computer can remember at once. It's like how many seats you have at your party.
+-------------------------
 
 7) ***recv() :*** is like opening a special mailbox to see if your computer got any messages from other computers.
 
@@ -123,6 +133,7 @@ ________________________________________________________________________________
   * **buf:** A place where the message will be put.
   * **len:** How much space is in the buffer to hold the message.
   * **flags:** Special options for receiving. You can usually set this to 0.
+-------------------------
 
 8) ***htons() :*** -> Host To Network Short
     make sure numbers are understood correctly when sending them between computers on a network IP/TCP.
@@ -133,17 +144,17 @@ ________________________________________________________________________________
 
 you would provide it with a 16-bit unsigned integer (like a port number) that you want to convert to network byte order. The function will then return the value in the appropriate byte order for sending over a network.
 
-______________________________________
+________________________________________________________________________________________________
 **Vector**
  - Creating a place (the vector) to store a bunch of "User". This vector will help you keep track of these users.
 
        #include <vector>
        std::vector<type_name> vector_name;
 
-______________________________________
+_______________________________________________________________________________________________
 
 ### The Netcat ( nc ) command
 
 command-line utility for reading and writing data between two computer networks. The communication happens using either TCP or UDP
 
-______________________________________
+_______________________________________________________________________________________________
