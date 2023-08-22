@@ -35,7 +35,7 @@ ________________________________________________________________________________
 
 
 2) ***poll() :*** It helps your computer wait for things to happen without using too much energy checking all the time.
-    when you're using recv() or send() to read or write data with non-blocking file descriptor spoll() to wait until there's something to read or write.
+    when you're using recv() or send() to read or write data with non-blocking file descriptors poll() to wait until there's something to read or write.
 
        #include <poll.h>
 
