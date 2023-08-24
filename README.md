@@ -144,6 +144,7 @@ ________________________________________________________________________________
 
 you would provide it with a 16-bit unsigned integer (like a port number) that you want to convert to network byte order. The function will then return the value in the appropriate byte order for sending over a network.
 
+-------------------------
 
 9) ***accept() :***
     facilitates the process of transitioning from the initial listening state to actively communicating with a client. It encapsulates the mechanics of acknowledging and         
