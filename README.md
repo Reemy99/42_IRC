@@ -144,6 +144,16 @@ ________________________________________________________________________________
 
 you would provide it with a 16-bit unsigned integer (like a port number) that you want to convert to network byte order. The function will then return the value in the appropriate byte order for sending over a network.
 
+
+9) ***accept() :***
+    facilitates the process of transitioning from the initial listening state to actively communicating with a client. It encapsulates the mechanics of acknowledging and         
+     accommodating incoming connection requests, ultimately facilitating seamless and reliable network-based interactions.
+
+       #include <sys/types.h>
+       #include <sys/socket.h>
+       
+       int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+
 ________________________________________________________________________________________________
 **Vector**
  - Creating a place (the vector) to store a bunch of "User". This vector will help you keep track of these users.
