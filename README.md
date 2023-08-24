@@ -135,7 +135,7 @@ ________________________________________________________________________________
   * **flags:** Special options for receiving. You can usually set this to 0.
 -------------------------
 
-8) ***htons() :*** -> Host To Network Short
+8) ***htons() :*** -> _Host To Network Short_
     make sure numbers are understood correctly when sending them between computers on a network IP/TCP.
 
        #include <arpa/inet.h>
