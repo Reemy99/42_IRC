@@ -118,7 +118,7 @@ void Server::runServer()
             exit (EXIT_FAILURE);
         }
         for (int i = 0 ; i < fds.size(); i++){
-            if (fds[i].revents & POLLIN) { //if fds[i] has data that can be read without blocking AND can safely read operation be on it
+            if (fds[i].revents & POLLIN) { //data that can be read without blocking AND can safely read operation be on it
                 if (fds[i].fd == sockfd) {
                     int clientFd = acceptConection(sockfd);
                     pollfd tmp2 = (clientFd, POLLIN, 0);
