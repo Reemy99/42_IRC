@@ -28,9 +28,9 @@ ________________________________________________________________________________
  1) ***poll() :*** It helps your computer wait for things to happen without using too much energy checking all the time.
     when you're using recv() or send() to read or write data with non-blocking file descriptors poll() to wait until there's something to read or write.
 
-       #include <poll.h>
-
-       int poll(struct pollfd *fds, nfds_t nfds, int timeout);
+        #include <poll.h>
+ 
+        int poll(struct pollfd *fds, nfds_t nfds, int timeout);
 
    * **fds :** An array of struct pollfd structures, each representing a file descriptor that you want to monitor and the events you're interested in (such as reading, writing, or errors).
    * **struct pollfd :** is a specific type of struct used with the poll() function. It holds information about a file descriptor that you want to monitor and the events you're interested in for that descriptor. 
@@ -42,7 +42,7 @@ ________________________________________________________________________________
     > short events; // pollin, pollout and pollerr
     > 
     > short revents;
-};
+    };
  
    * **nfds :** The number of file descriptors in the array.
    * **timeout :**  The maximum amount of time to wait for an event to occur, It's specified in milliseconds.-1 for an indefinite wait, 0 for a non-blocking check, or a positive value for a specific timeout.
@@ -154,6 +154,23 @@ you would provide it with a 16-bit unsigned integer (like a port number) that yo
        #include <sys/socket.h>
        
        int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+-------------------------
+10) ***struct FindByFD :***
+    function object used with std::find_if() to find a user by their file descriptor. It's not a standard function in C++,
+    but a custom one that you or someone else defined in your code.
+A predicate is a function that returns a boolean value based on some condition.
+
+        struct FindByFD {
+          int target_fd;
+      
+          FindByFD(int fd) : target_fd(fd) {}
+      
+          bool operator()(const User& user) const {
+              return user.fd() == target_fd;
+          }
+      };
+
+
 
 ________________________________________________________________________________________________
 **Vector**
