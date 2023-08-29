@@ -9,13 +9,23 @@
 #define CYAN    "\033[36m" 
 #define RESET	"\033[0m"
 
-#include <fcntl.h>
-#include <poll.h>
-#include <iostream>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <arpa/inet.h> //htons
+// #include <poll.h>
+// #include <iostream>
+// #include <sys/socket.h>
+// #include <vector>
+
 #include <vector>
+#include <poll.h>
+#include <fcntl.h>
+#include <netdb.h>
+#include <cstring>
+#include <unistd.h>
+#include <iostream>
+#include <algorithm>
+#include <sys/types.h>
+#include <arpa/inet.h> //htons
+#include <arpa/inet.h>
+#include <sys/socket.h>
 
 const int PORT = 6667;
 const int MAX_CLIENTS = 4096;
@@ -28,6 +38,7 @@ class Server
         size_t _bufferLength;
 
     public:
+        Server();
         Server(int fd);
         ~Server();
 
@@ -45,6 +56,7 @@ class Server
         void bindSocket(int sockfd);
         void listenSocket(int sockfd);
         int acceptConection(int sockfd);
+        void removeUser(std::vector<Server>& users, int fd);
         void runServer();
 };
 
