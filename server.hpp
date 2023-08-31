@@ -60,5 +60,14 @@ class Server
         void runServer();
 };
 
+struct FindByFD
+{
+    int fd;
+
+    FindByFD(int fd) : fd(fd) { }
+    bool operator()(const Server &user) const {
+        return user.getFd() == fd;
+    }
+};
 
 #endif

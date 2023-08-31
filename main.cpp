@@ -1,4 +1,5 @@
 #include "server.hpp"
+#include <signal.h>
 
 int main()
 {

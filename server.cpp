@@ -1,14 +1,14 @@
 #include "server.hpp"
 
-
+Server::Server() {}
 Server::Server(int fd) : _fd(fd) , _buffer("\0") , _bufferLength(0)
 {
-    std::cout << GREEN << "Server Constructor Called" << RESET << std::endl;
+    //std::cout << GREEN << "Server Constructor Called" << RESET << std::endl;
 }
 
 Server::~Server()
 {
-    std::cout << RED << "Server Destructor Called" << RESET << std::endl;
+    //std::cout << RED << "Server Destructor Called" << RESET << std::endl;
 }
 
 int Server::getFd() const
@@ -90,6 +90,7 @@ int Server::acceptConection(int sockfd)
 {
     struct sockaddr_in clientAddr; //hold clientAddr information
     socklen_t clientLen = sizeof (clientAddr);
+
     //int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
     int clientFd = accept(sockfd, (struct sockaddr *)&clientAddr, &clientLen);
     if (clientFd == -1){
@@ -117,25 +118,25 @@ void Server::runServer()
 
     std::vector<Server> users;
 
-    std::vector<pollfd> fds; // move to class 
+    std::vector<pollfd> fds; 
     pollfd tmp = {sockfd, POLLIN, 0};
     fds.push_back(tmp);
 
-    while(1)
+    while(true)
     {
         //int poll(representing a FD, number of FD, timeout);
         int numFds = poll(fds.data(), fds.size(), -1);
-        if (numFds = -1)
+        if (numFds == -1)
         {
             std::cout << RED "failed to poll" << RESET << std::endl;
             exit (EXIT_FAILURE);
         }
-        for (int i = 0 ; i < fds.size(); i++){
+        for (int i = 0 ; i < (int)fds.size(); i++){
             if (fds[i].revents & POLLIN) { //data that can be read without blocking AND can safely read operation be on it
                 if (fds[i].fd == sockfd) {
                     // New client connection and add it to "users, fds" vectors
                     int clientFd = acceptConection(sockfd);
-                    pollfd tmp2 = (clientFd, POLLIN, 0);
+                    pollfd tmp2 = {clientFd, POLLIN, 0};
                     fds.push_back(tmp2);
                     users.push_back(Server(clientFd));
                     std::cout << BLUE << "new client connected FD:" << clientFd << RESET << std::endl;
@@ -144,6 +145,9 @@ void Server::runServer()
                     // Client message received
                     char buffer[4096];
                     int byteRead = read(fds[i].fd, buffer, sizeof(buffer));
+                    buffer[byteRead] = '\0';
+
+                    std::cout << " byteRead -----> " << byteRead << std::endl;
                     if (byteRead <= 0){
                         std::cout << RED << "Client disconnected FD :" << fds[i].fd << RESET << std::endl;
                         removeUser(users, fds[i].fd);
@@ -155,17 +159,13 @@ void Server::runServer()
 
                         if (it != users.end())
                         // Append message to user's buffer
-                        memcpy(it->getBuffer(), it->getBufferLen(), buffer, byteRead); // 3 args
+                        memcpy(it->getBuffer()+ it->getBufferLen(), buffer, byteRead);
                         it->setBufferLen(it->getBufferLen() + byteRead);
 
                         // Process messages in user's buffer
                         char *msgStart = it->getBuffer();
-                        char *msgEnd = nullptr;
-                        while (msgEnd = strchr(msgStart, '\n') != nullptr){
-                            msgEnd = NULL;
-                            std::cout << BLUE << "Received message from client" << fd[i].fd << ": " << RESET << msgStart << std::endl;
-                            msgStart = msgEnd + 1;
-                        }
+                        // std::cout << "-------> " << msgStart;
+                        std::cout << BLUE << "Received message from client " << fds[i].fd << ": \n" << RESET << msgStart << std::endl;
                         it->setBufferLen(strlen(msgStart));
                         msgStart = it->getBuffer();
                     }
