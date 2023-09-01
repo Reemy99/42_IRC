@@ -1,13 +1,50 @@
 #include "server.hpp"
 
-Server::Server() : _buffer("\0")
+Server::Server() {}
+Server::Server(int fd) : _fd(fd) , _buffer("\0") , _bufferLength(0)
 {
-    std::cout << GREEN << "Server Constructor Called" << RESET << std::endl;
+    //std::cout << GREEN << "Server Constructor Called" << RESET << std::endl;
 }
 
 Server::~Server()
 {
-    std::cout << RED << "Server Destructor Called" << RESET << std::endl;
+    //std::cout << RED << "Server Destructor Called" << RESET << std::endl;
+}
+
+int Server::getFd() const
+{
+    return this->_fd;
+}
+
+void Server::setFd(int fd)
+{
+    this->_fd = fd;
+}
+
+int Server::fdVal() const
+{
+    return (_fd);
+}
+
+char* Server::getBuffer()
+{
+    return this->_buffer;
+}
+
+size_t Server::getBufferLen() const
+{
+    return this->_bufferLength;
+}
+
+void Server::setBufferLen(size_t len) 
+{
+    _bufferLength = len;
+}
+
+void Server::clearBuffer()
+{
+    memset(_buffer, 0 , sizeof(_buffer));
+    _bufferLength = 0;
 }
 
 int Server::createSocket()
@@ -53,6 +90,7 @@ int Server::acceptConection(int sockfd)
 {
     struct sockaddr_in clientAddr; //hold clientAddr information
     socklen_t clientLen = sizeof (clientAddr);
+
     //int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
     int clientFd = accept(sockfd, (struct sockaddr *)&clientAddr, &clientLen);
     if (clientFd == -1){
@@ -63,11 +101,11 @@ int Server::acceptConection(int sockfd)
     return clientFd; //Return the new socket descriptor for communication with the client.
 }
 
-void Server::removeUser(std::vector<User> &users, int fd)
+void Server::removeUser(std::vector<Server> &users, int fd)
 {
-    std::vector<User>::iterator it = std::find_if(users.begin(), users.end(), FindByFD(fd));
+    std::vector<Server>::iterator it = std::find_if(users.begin(), users.end(), FindByFD(fd));
     if (it != users.end()) {
-        close(it->_fd);
+        close(it->fdVal());
         users.erase(it);
     }
 }
@@ -78,46 +116,58 @@ void Server::runServer()
     bindSocket(sockfd);
     listenSocket(sockfd);
 
+    std::vector<Server> users;
 
+    std::vector<pollfd> fds; 
     pollfd tmp = {sockfd, POLLIN, 0};
-    _fds.push_back(tmp);
+    fds.push_back(tmp);
 
     while(true)
     {
         //int poll(representing a FD, number of FD, timeout);
-        int numFds = poll(_fds.data(), _fds.size(), -1);
+        int numFds = poll(fds.data(), fds.size(), -1);
         if (numFds == -1)
         {
             std::cout << RED "failed to poll" << RESET << std::endl;
             exit (EXIT_FAILURE);
         }
-        for (int i = 0 ; i < (int)_fds.size(); i++){
-            if (_fds[i].revents & POLLIN) { //data that can be read without blocking AND can safely read operation be on it
-                if (_fds[i].fd == sockfd) {
-                    // New client connection and add it to "users, _fds" vectors
+        for (int i = 0 ; i < (int)fds.size(); i++){
+            if (fds[i].revents & POLLIN) { //data that can be read without blocking AND can safely read operation be on it
+                if (fds[i].fd == sockfd) {
+                    // New client connection and add it to "users, fds" vectors
                     int clientFd = acceptConection(sockfd);
                     pollfd tmp2 = {clientFd, POLLIN, 0};
-                    _fds.push_back(tmp2);
-                    _users.push_back(User(clientFd));
+                    fds.push_back(tmp2);
+                    users.push_back(Server(clientFd));
                     std::cout << BLUE << "new client connected FD:" << clientFd << RESET << std::endl;
                 }
                 else{
                     // Client message received
-                    int byteRead = read(_fds[i].fd, _buffer, sizeof(_buffer));
-                    _buffer[byteRead - 1] = '\0';
-                    std::cout << "---------> " << byteRead << std::endl;
+                    char buffer[4096];
+                    int byteRead = read(fds[i].fd, buffer, sizeof(buffer));
+                    buffer[byteRead] = '\0';
+
+                    std::cout << " byteRead -----> " << byteRead << std::endl;
                     if (byteRead <= 0){
-                        std::cout << RED << "Client disconnected FD :" << _fds[i].fd << RESET << std::endl;
-                        removeUser(_users, _fds[i].fd);
-                        _fds.erase(_fds.begin() + i);
+                        std::cout << RED << "Client disconnected FD :" << fds[i].fd << RESET << std::endl;
+                        removeUser(users, fds[i].fd);
+                        fds.erase(fds.begin() + i);
                         i--;
                     }
                     else {
-                        std::vector<User>::iterator it = std::find_if(_users.begin(), _users.end(), FindByFD(_fds[i].fd));
+                        std::vector<Server>::iterator it = std::find_if(users.begin(), users.end(), FindByFD(fds[i].fd));
 
-                        std::string strBuffer(_buffer);
-                        std::cout << BLUE << "Received message from client" << _fds[i].fd << ": " << RESET << strBuffer << std::endl;
-                        it->parse(strBuffer);
+                        if (it != users.end())
+                        // Append message to user's buffer
+                        memcpy(it->getBuffer()+ it->getBufferLen(), buffer, byteRead);
+                        it->setBufferLen(it->getBufferLen() + byteRead);
+
+                        // Process messages in user's buffer
+                        char *msgStart = it->getBuffer();
+                        // std::cout << "-------> " << msgStart;
+                        std::cout << BLUE << "Received message from client " << fds[i].fd << ": \n" << RESET << msgStart << std::endl;
+                        it->setBufferLen(strlen(msgStart));
+                        msgStart = it->getBuffer();
                     }
                 }
             }

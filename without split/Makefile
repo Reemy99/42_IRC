@@ -1,8 +1,7 @@
 NAME = Server
 
 FILES = main.cpp\
-		server.cpp\
-		User.cpp
+		server.cpp
 
 OBJ = $(FILES:.cpp=.o)
 

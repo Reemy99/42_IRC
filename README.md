@@ -28,9 +28,9 @@ ________________________________________________________________________________
  1) ***poll() :*** It helps your computer wait for things to happen without using too much energy checking all the time.
     when you're using recv() or send() to read or write data with non-blocking file descriptors poll() to wait until there's something to read or write.
 
-        #include <poll.h>
- 
-        int poll(struct pollfd *fds, nfds_t nfds, int timeout);
+       #include <poll.h>
+
+       int poll(struct pollfd *fds, nfds_t nfds, int timeout);
 
    * **fds :** An array of struct pollfd structures, each representing a file descriptor that you want to monitor and the events you're interested in (such as reading, writing, or errors).
    * **struct pollfd :** is a specific type of struct used with the poll() function. It holds information about a file descriptor that you want to monitor and the events you're interested in for that descriptor. 
@@ -42,7 +42,7 @@ ________________________________________________________________________________
     > short events; // pollin, pollout and pollerr
     > 
     > short revents;
-    };
+};
  
    * **nfds :** The number of file descriptors in the array.
    * **timeout :**  The maximum amount of time to wait for an event to occur, It's specified in milliseconds.-1 for an indefinite wait, 0 for a non-blocking check, or a positive value for a specific timeout.
