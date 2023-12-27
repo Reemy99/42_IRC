@@ -26,28 +26,38 @@
 #include <arpa/inet.h> //htons
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include "User.hpp"
 
 const int PORT = 6666;
 const int MAX_CLIENTS = 4096;
-class User;
+
 class Server
 {
     private:
+        int _fd;
         char _buffer[4096];
+        size_t _bufferLength;
 
     public:
-
         Server();
+        Server(int fd);
         ~Server();
+
+        int fdVal() const;
+        int getFd() const;
+        void setFd(int fd);
+        
+        char* getBuffer();
+        void clearBuffer();
+        
+        size_t getBufferLen() const;
+        void setBufferLen(size_t len);
+
         int createSocket();
         void bindSocket(int sockfd);
         void listenSocket(int sockfd);
         int acceptConection(int sockfd);
-        void removeUser(std::vector<User>& users, int fd);
+        void removeUser(std::vector<Server>& users, int fd);
         void runServer();
-        std::vector<User> _users;
-        std::vector<pollfd> _fds; 
 };
 
 struct FindByFD
@@ -55,8 +65,8 @@ struct FindByFD
     int fd;
 
     FindByFD(int fd) : fd(fd) { }
-    bool operator()(const User &user) const {
-        return user._fd == fd;
+    bool operator()(const Server &user) const {
+        return user.getFd() == fd;
     }
 };
 
